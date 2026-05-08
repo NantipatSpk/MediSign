@@ -209,7 +209,7 @@
             img.src = `${GITHUB_BASE_URL}${folder}/${filename}.gif`;
             img.alt = filename;
             // ซ่อนไว้ก่อนจนกว่าจะโหลดเสร็จ
-            img.className = "h-40 rounded-xl object-cover bg-gray-100 border-2 border-gray-100 opacity-0 transition-opacity duration-500";
+            img.className = "h-64 md:h-72 rounded-xl object-cover bg-gray-100 border-2 border-gray-100 opacity-0 transition-opacity duration-500 shadow-sm";
             
             img.onload = function() {
                 this.classList.remove('opacity-0'); // แสดงภาพแบบเฟดอินเมื่อโหลดเสร็จ
