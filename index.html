@@ -3,76 +3,197 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>About My App</title>
+    <title>MediSign - Sign Language Translator</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
-        /* สี Iris Purple ที่คุณชอบ */
         .bg-iris { background-color: #5D3FD3; }
         .text-iris { color: #5D3FD3; }
         .border-iris { border-color: #5D3FD3; }
+        /* ซ่อน Scrollbar สำหรับแนวนอน */
+        .hide-scroll::-webkit-scrollbar { display: none; }
+        .hide-scroll { -ms-overflow-style: none; scrollbar-width: none; }
     </style>
 </head>
 <body class="bg-gray-50 text-gray-900 font-sans">
 
-    <!-- Hero Section -->
-    <header class="py-20 px-6 text-center bg-white border-b border-gray-100">
-        <h1 class="text-4xl md:text-5xl font-extrabold mb-4">MediSign</h1>
+    <!-- Hero Section & Logo -->
+    <header class="py-16 px-6 text-center bg-white border-b border-gray-100">
+        <!-- พื้นที่ใส่ Logo -->
+        <div class="flex justify-center mb-6">
+            <div class="w-24 h-24 bg-gray-50 rounded-full flex items-center justify-center border-2 border-iris overflow-hidden">
+                <!-- ใส่ <img src="logo.png"> ตรงนี้แทนตัวหนังสือได้เลย -->
+                <span class="text-iris font-bold text-sm tracking-widest">LOGO</span>
+            </div>
+        </div>
+        
+        <h1 class="text-4xl md:text-5xl font-extrabold mb-4 text-iris">MediSign</h1>
         <p class="text-xl text-gray-600 max-w-2xl mx-auto">
             นวัตกรรมเพื่อการสื่อสาร: เปลี่ยนภาษามือเป็นข้อความและเสียง เพื่อความสะดวกในโรงพยาบาลและร้านขายยา
         </p>
     </header>
 
-    <!-- App Overview -->
+    <!-- Phrase Composition & Display Section -->
     <section class="max-w-5xl mx-auto py-16 px-6">
-        <div class="grid md:grid-cols-2 gap-12 items-center">
-            <div>
-                <h2 class="text-2xl font-bold mb-4 border-l-4 border-iris pl-4">แอปนี้ทำอะไรได้บ้าง?</h2>
-                <ul class="space-y-3 text-gray-700">
-                    <li>• ตรวจจับท่าทางภาษามือผ่านกล้องแบบ Real-time</li>
-                    <li>• แปลงเป็นตัวอักษรและประมวลผลเป็นเสียง (TTS)</li>
-                    <li>• ออกแบบมาให้ใช้งานง่ายในสถานการณ์เร่งด่วนทางการแพทย์</li>
-                </ul>
-            </div>
-            <!-- ส่วนนี้ใส่ภาพ GIF รวมๆ ของแอป -->
-            <div class="bg-gray-200 rounded-2xl overflow-hidden aspect-video flex items-center justify-center">
-                <p class="text-gray-500 italic">[ ใส่ GIF ตัวอย่างแอปที่นี่ ]</p>
-            </div>
-        </div>
-    </section>
+        <h2 class="text-2xl font-bold mb-8 border-l-4 border-iris pl-4">ระบบแสดงผลภาษามือ</h2>
+        
+        <div class="grid md:grid-cols-2 gap-8">
+            <!-- ซ้าย: ตัวเลือกคำศัพท์ -->
+            <div class="bg-white p-6 rounded-2xl border border-gray-100">
+                <h3 class="font-bold text-lg mb-4 text-gray-700">หมวดหมู่คำศัพท์</h3>
+                
+                <!-- เลือกหมวดหมู่ -->
+                <select id="category-select" class="w-full p-3 rounded-lg bg-gray-50 border border-gray-200 mb-4 focus:outline-none focus:border-iris transition-colors" onchange="updateWordList()">
+                    <option value="sickness">อาการป่วย (Sickness) - คำเดี่ยว</option>
+                    <option value="medicine">หมวดยา (Medicine) - คำผสม</option>
+                    <option value="allergy">การแพ้ (Allergy) - คำผสม</option>
+                    <option value="general">ทั่วไป (General) - คำผสม</option>
+                </select>
 
-    <!-- Gestures Library -->
-    <section class="bg-white py-16 px-6">
-        <div class="max-w-5xl mx-auto">
-            <h2 class="text-2xl font-bold mb-10 text-center uppercase tracking-widest">ท่าทางที่รองรับ</h2>
-            
-            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
-                <!-- ท่าที่ 1 -->
-                <div class="group">
-                    <div class="bg-gray-100 rounded-xl overflow-hidden mb-4 border border-transparent group-hover:border-iris transition-all">
-                        <img src="your-gesture-1.gif" alt="Gesture 1" class="w-full h-48 object-cover">
-                    </div>
-                    <h3 class="font-bold text-lg">ท่าทาง: สวัสดี</h3>
-                    <p class="text-sm text-gray-500 text-pretty">คำอธิบายสั้นๆ เกี่ยวกับการเคลื่อนไหวมือ</p>
+                <!-- เลือกคำที่จะแสดง -->
+                <h3 class="font-bold text-lg mb-4 text-gray-700 mt-6">เลือกคำที่ต้องการ</h3>
+                <div id="word-buttons" class="flex flex-wrap gap-2 max-h-60 overflow-y-auto hide-scroll pb-2">
+                    <!-- ปุ่มจะถูกสร้างอัตโนมัติด้วย JavaScript ตรงนี้ -->
                 </div>
+            </div>
 
-                <!-- ท่าที่ 2 -->
-                <div class="group">
-                    <div class="bg-gray-100 rounded-xl overflow-hidden mb-4 border border-transparent group-hover:border-iris transition-all">
-                        <img src="your-gesture-2.gif" alt="Gesture 2" class="w-full h-48 object-cover">
-                    </div>
-                    <h3 class="font-bold text-lg">ท่าทาง: ขอบคุณ</h3>
-                    <p class="text-sm text-gray-500">คำอธิบายสั้นๆ เกี่ยวกับการเคลื่อนไหวมือ</p>
+            <!-- ขวา: พื้นที่แสดงผล GIF -->
+            <div class="bg-white p-6 rounded-2xl border border-gray-100 flex flex-col items-center justify-center min-h-[300px]">
+                <h3 id="result-text" class="text-2xl font-extrabold text-iris mb-6 min-h-[32px]">กรุณาเลือกคำศัพท์</h3>
+                
+                <!-- คอนเทนเนอร์สำหรับใส่ GIF หลายๆ ตัวต่อกัน -->
+                <div id="gif-sequence" class="flex flex-wrap justify-center gap-2">
+                    <p class="text-gray-400 italic text-sm">ภาพจำลองจะแสดงที่นี่</p>
                 </div>
             </div>
         </div>
     </section>
 
     <!-- Footer / Action -->
-    <footer class="py-16 text-center">
-        <button class="bg-iris text-white px-8 py-3 rounded-full font-bold hover:opacity-90 transition-all shadow-lg shadow-purple-200">
+    <footer class="py-16 text-center bg-gray-50">
+        <!-- ปรับปุ่มเป็นแบบแบนราบ ไม่มีเงา -->
+        <button class="bg-iris text-white px-8 py-3 rounded-full font-bold hover:bg-opacity-90 transition-colors">
             ดูรายละเอียดบน GitHub
         </button>
     </footer>
 
+    <!-- JavaScript Logic -->
+    <script>
+        // --- ส่วนที่ 1: ตั้งค่าโฟลเดอร์ GitHub ของคุณ ---
+        // เปลี่ยน URL ด้านล่างให้ตรงกับ Repo ของคุณ (ตรวจสอบชื่อ Repo ให้ถูกต้อง)
+        // --- ส่วนที่ 1: ตั้งค่าโฟลเดอร์ GitHub ของคุณ ---
+        const GITHUB_BASE_URL = "https://raw.githubusercontent.com/NantipatSpk/YOUR_REPO_NAME/main/";
+        
+        // --- ส่วนที่ 2: กฎการผสมคำ (อัปเดตครบทุกคำ) ---
+        const rules = {
+            sickness: [
+                // ดึงมาจากชื่อโฟลเดอร์ในภาพแรก
+                "คลื่นไส้", "ปวดท้อง", "ปวดหัว", "เจ็บคอ", "ไอ", "เป็นไข้", 
+                "อาเจียน", "ปวดฟัน", "เป็นแผล", "ท้องเสีย", "ปวดหลัง", "ปวดหู", 
+                "คันตา", "หายใจไม่ออก", "หนาวสั่น", "วิงเวียน", "เหนื่อย", "เจ็บหน้าอก"
+            ],
+            allergy: [
+                { sequence: ["ยา", "แพ้"], result: "แพ้ยา" },
+                { sequence: ["อาหาร", "แพ้"], result: "แพ้อาหาร" },
+                { sequence: ["นม", "แพ้"], result: "แพ้นม" },
+                { sequence: ["ยา", "แพ้", "ไม่"], result: "ไม่แพ้ยา" },
+                { sequence: ["อาหาร", "แพ้", "ไม่"], result: "ไม่แพ้อาหาร" }
+            ],
+            medicine: [
+                { sequence: ["ขอ", "ยา"], result: "ขอยา" },
+                { sequence: ["ยา", "ปวด"], result: "ยาแก้ปวด" },
+                { sequence: ["ยา", "ไข้"], result: "ยาแก้ไข้" },
+                { sequence: ["ยา", "ไอ"], result: "ยาแก้ไอ" },
+                { sequence: ["ยา", "แพ้"], result: "ยาแก้แพ้" },
+                { sequence: ["ยา", "ท้องเสีย"], result: "ยาแก้ท้องเสีย" },
+                { sequence: ["ยา", "ทาแผล"], result: "ยาทาแผล" },
+                { sequence: ["ยา", "นอนหลับ"], result: "ยานอนหลับ" },
+                { sequence: ["ยา", "ก่อน", "อาหาร"], result: "ยาก่อนอาหาร" },
+                { sequence: ["ยา", "หลัง", "อาหาร"], result: "ยาหลังอาหาร" },
+                { sequence: ["ยา", "น้ำ"], result: "ยาน้ำ" },
+                { sequence: ["ยา", "เม็ด"], result: "ยาเม็ด" },
+                { sequence: ["ยา", "ดม"], result: "ยาดม" },
+                { sequence: ["ยา", "หยอดตา"], result: "ยาหยอดตา" }
+            ],
+            general: [
+                { sequence: ["คนเดียว"], result: "มาคนเดียว" },
+                { sequence: ["ครอบครัว"], result: "มากับครอบครัว" },
+                { sequence: ["เพื่อน"], result: "มากับเพื่อน" },
+                { sequence: ["บัตรประชาชน"], result: "มีบัตรประชาชน" },
+                { sequence: ["ไม่", "บัตรประชาชน"], result: "ไม่มีบัตรประชาชน" },
+                { sequence: ["หนึ่ง", "ก่อน"], result: "เมื่อวานนี้" },
+                { sequence: ["สอง", "ก่อน"], result: "สองวันก่อน" },
+                { sequence: ["สัปดาห์", "ก่อน"], result: "อาทิตย์ก่อน" },
+                { sequence: ["เดือน", "ก่อน"], result: "เดือนก่อน" },
+                { sequence: ["ราคาเท่าไหร่"], result: "ราคาเท่าไหร่" },
+                { sequence: ["หมอนัด"], result: "หมอนัด" }
+            ]
+        };
+        
+        // --- ส่วนที่ 3: ระบบแสดงผล (ปรับปรุงให้โหลดลื่นขึ้น) ---
+        function updateWordList() {
+            const category = document.getElementById('category-select').value;
+            const container = document.getElementById('word-buttons');
+            container.innerHTML = ""; 
+        
+            const items = rules[category];
+            
+            items.forEach(item => {
+                const button = document.createElement('button');
+                button.className = "px-4 py-2 bg-gray-100 text-gray-700 rounded-lg text-sm font-medium hover:bg-iris hover:text-white transition-colors border border-transparent";
+                
+                const word = category === 'sickness' ? item : item.result;
+                button.innerText = word;
+                // จัดการเมื่อกดปุ่ม
+                button.onclick = () => displaySignLanguage(category, word, item);
+                
+                container.appendChild(button);
+            });
+        }
+        
+        function displaySignLanguage(category, word, itemData) {
+            const container = document.getElementById('gif-sequence');
+            const textDisplay = document.getElementById('result-text');
+            
+            // แสดงข้อความ Loading ระหว่างที่รอไฟล์จาก GitHub
+            container.innerHTML = `<p class="text-iris animate-pulse font-medium">กำลังโหลดภาพ...</p>`;
+            textDisplay.innerText = word; 
+        
+            // ใช้ setTimeout เล็กน้อยเพื่อให้ UI อัปเดตคำว่า "กำลังโหลดภาพ..." ก่อนดึงไฟล์หนักๆ
+            setTimeout(() => {
+                container.innerHTML = ""; // ล้าง Loading ออก
+                
+                if (category === 'sickness') {
+                    renderGif('sickness', word);
+                } else {
+                    itemData.sequence.forEach(part => {
+                        renderGif(category, part);
+                    });
+                }
+            }, 100);
+        }
+        
+        function renderGif(folder, filename) {
+            // โหลดภาพแบบ Asynchronous
+            const img = new Image(); 
+            img.src = `${GITHUB_BASE_URL}${folder}/${filename}.gif`;
+            img.alt = filename;
+            // ซ่อนไว้ก่อนจนกว่าจะโหลดเสร็จ
+            img.className = "h-40 rounded-xl object-cover bg-gray-100 border-2 border-gray-100 opacity-0 transition-opacity duration-500";
+            
+            img.onload = function() {
+                this.classList.remove('opacity-0'); // แสดงภาพแบบเฟดอินเมื่อโหลดเสร็จ
+            };
+        
+            img.onerror = function() {
+                this.src = "https://via.placeholder.com/150x160/f3f4f6/5D3FD3?text=" + filename;
+                this.classList.remove('opacity-0');
+            };
+        
+            document.getElementById('gif-sequence').appendChild(img);
+        }
+        
+        // โหลดปุ่มครั้งแรก
+        updateWordList();
+    </script>
 </body>
 </html>
