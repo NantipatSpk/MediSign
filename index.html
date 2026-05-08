@@ -22,7 +22,7 @@
         <div class="flex justify-center mb-6">
             <div class="w-24 h-24 bg-gray-50 rounded-full flex items-center justify-center border-2 border-iris overflow-hidden">
                 <!-- ใส่ <img src="logo.png"> ตรงนี้แทนตัวหนังสือได้เลย -->
-                <img src="logo_medisign.png" alt="MediSign Logo">
+                <img src="logo_medisignbg.png" alt="MediSign Logo">
             </div>
         </div>
         
@@ -60,7 +60,7 @@
                 <svg xmlns="http://www.w3.org/2000/svg" class="h-12 w-12 mb-2 text-gray-300" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
                 </svg>
-                <span class="text-sm">[ พื้นที่ใส่รูปประกอบการทำงานของแอป ]</span>
+                <img src="ux.jpg" alt="ux">
             </div>
         </div>
     </section>
@@ -203,24 +203,60 @@
             }, 100);
         }
         
-        function renderGif(folder, filename) {
-            // โหลดภาพแบบ Asynchronous
+       function displaySignLanguage(category, word, itemData) {
+            const container = document.getElementById('gif-sequence');
+            const textDisplay = document.getElementById('result-text');
+            
+            // แสดงข้อความ Loading
+            container.innerHTML = `<p class="text-iris animate-pulse font-medium">กำลังโหลดภาพ...</p>`;
+            textDisplay.innerText = word; 
+        
+            setTimeout(() => {
+                container.innerHTML = ""; // ล้าง Loading ออก
+                
+                if (category === 'sickness') {
+                    // ถ้าเป็นคำเดี่ยว ส่งเลข 1 ไป
+                    renderGif('sickness', word, 1);
+                } else {
+                    // ถ้าเป็นคำผสม ใช้ forEach วนลูปและส่งลำดับ (index + 1) ไปด้วย
+                    itemData.sequence.forEach((part, index) => {
+                        renderGif(category, part, index + 1);
+                    });
+                }
+            }, 100);
+        }
+        
+        function renderGif(folder, filename, stepNumber) {
+            // 1. สร้างกล่อง (Wrapper) เพื่อครอบทั้งรูปและตัวเลข
+            const wrapper = document.createElement('div');
+            wrapper.className = "flex flex-col items-center gap-3"; 
+
+            // 2. สร้างรูปภาพ GIF
             const img = new Image(); 
             img.src = `${GITHUB_BASE_URL}${folder}/${filename}.gif`;
             img.alt = filename;
-            // ซ่อนไว้ก่อนจนกว่าจะโหลดเสร็จ
             img.className = "h-64 md:h-72 rounded-xl object-cover bg-gray-100 border-2 border-gray-100 opacity-0 transition-opacity duration-500 shadow-sm";
             
             img.onload = function() {
-                this.classList.remove('opacity-0'); // แสดงภาพแบบเฟดอินเมื่อโหลดเสร็จ
-            };
-        
-            img.onerror = function() {
-                this.src = "https://via.placeholder.com/150x160/f3f4f6/5D3FD3?text=" + filename;
                 this.classList.remove('opacity-0');
             };
         
-            document.getElementById('gif-sequence').appendChild(img);
+            img.onerror = function() {
+                this.src = "https://via.placeholder.com/250x400/f3f4f6/5D3FD3?text=" + filename;
+                this.classList.remove('opacity-0');
+            };
+
+            // 3. สร้างวงกลมตัวเลขลำดับ (สีม่วง Iris)
+            const numberBadge = document.createElement('div');
+            numberBadge.className = "w-10 h-10 rounded-full bg-iris text-white flex items-center justify-center font-bold text-lg shadow-sm";
+            numberBadge.innerText = stepNumber;
+        
+            // 4. เอาภาพและตัวเลขประกอบเข้าด้วยกันในกล่อง
+            wrapper.appendChild(img);
+            wrapper.appendChild(numberBadge);
+
+            // 5. นำกล่องไปแสดงผลบนเว็บ
+            document.getElementById('gif-sequence').appendChild(wrapper);
         }
         
         // โหลดปุ่มครั้งแรก
