@@ -22,7 +22,7 @@
         <div class="flex justify-center mb-6">
             <div class="w-24 h-24 bg-gray-50 rounded-full flex items-center justify-center border-2 border-iris overflow-hidden">
                 <!-- ใส่ <img src="logo.png"> ตรงนี้แทนตัวหนังสือได้เลย -->
-                <span class="text-iris font-bold text-sm tracking-widest">LOGO</span>
+                <img src="logo_medisign.png" alt="MediSign Logo">
             </div>
         </div>
         
@@ -31,6 +31,39 @@
             นวัตกรรมเพื่อการสื่อสาร: เปลี่ยนภาษามือเป็นข้อความและเสียง เพื่อความสะดวกในโรงพยาบาลและร้านขายยา
         </p>
     </header>
+
+    <!-- App Overview Section (เพิ่มใหม่) -->
+    <section class="max-w-5xl mx-auto pt-16 px-6">
+        <h2 class="text-2xl font-bold mb-6 border-l-4 border-iris pl-4">แอปนี้คืออะไร?</h2>
+        <div class="bg-white p-8 rounded-2xl border border-gray-100 flex flex-col md:flex-row gap-8 items-center">
+            <div class="flex-1 space-y-4 text-gray-700 leading-relaxed">
+                <p>
+                    <strong class="text-iris text-lg">MediSign</strong> คือระบบผู้ช่วยแปลภาษามือที่ออกแบบมาเพื่อทลายกำแพงการสื่อสารระหว่างผู้ป่วยที่มีความบกพร่องทางการได้ยินและบุคลากรทางการแพทย์ ให้สามารถเข้าใจกันได้อย่างถูกต้องและรวดเร็ว
+                </p>
+                <ul class="space-y-3 mt-4">
+                    <li class="flex items-start gap-3">
+                        <div class="w-6 h-6 rounded-full bg-indigo-50 flex items-center justify-center text-iris font-bold shrink-0 mt-0.5">✓</div>
+                        <span><strong>แปลท่าทางเป็นตัวอักษร:</strong> แปลงภาษามือเป็นข้อความเพื่อความเข้าใจที่ตรงกันในสถานการณ์การรักษา</span>
+                    </li>
+                    <li class="flex items-start gap-3">
+                        <div class="w-6 h-6 rounded-full bg-indigo-50 flex items-center justify-center text-iris font-bold shrink-0 mt-0.5">✓</div>
+                        <span><strong>ระบบเสียงพูด (Text-to-Speech):</strong> ประมวลผลข้อความเป็นเสียงพูดโดยอัตโนมัติ เพื่อความรวดเร็วในการโต้ตอบ</span>
+                    </li>
+                    <li class="flex items-start gap-3">
+                        <div class="w-6 h-6 rounded-full bg-indigo-50 flex items-center justify-center text-iris font-bold shrink-0 mt-0.5">✓</div>
+                        <span><strong>หมวดหมู่ครอบคลุม:</strong> รวบรวมคำศัพท์และประโยคผสมที่จำเป็นต่อการซักประวัติ จ่ายยา และแจ้งอาการ</span>
+                    </li>
+                </ul>
+            </div>
+            <!-- พื้นที่สำหรับใส่ภาพประกอบแอป หรือภาพอธิบายการทำงาน -->
+            <div class="w-full md:w-1/3 aspect-video md:aspect-square bg-gray-50 rounded-xl border-2 border-dashed border-gray-200 flex flex-col items-center justify-center text-gray-400 p-4 text-center">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-12 w-12 mb-2 text-gray-300" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
+                </svg>
+                <span class="text-sm">[ พื้นที่ใส่รูปประกอบการทำงานของแอป ]</span>
+            </div>
+        </div>
+    </section>
 
     <!-- Phrase Composition & Display Section -->
     <section class="max-w-5xl mx-auto py-16 px-6">
@@ -78,8 +111,6 @@
 
     <!-- JavaScript Logic -->
     <script>
-        // --- ส่วนที่ 1: ตั้งค่าโฟลเดอร์ GitHub ของคุณ ---
-        // เปลี่ยน URL ด้านล่างให้ตรงกับ Repo ของคุณ (ตรวจสอบชื่อ Repo ให้ถูกต้อง)
         // --- ส่วนที่ 1: ตั้งค่าโฟลเดอร์ GitHub ของคุณ ---
         const GITHUB_BASE_URL = "https://raw.githubusercontent.com/NantipatSpk/MediSign/main/";
         
