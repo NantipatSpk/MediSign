@@ -106,18 +106,38 @@
                 { sequence: ["ยา", "แพ้"], result: "แพ้ยา" },
                 { sequence: ["อาหาร", "แพ้"], result: "แพ้อาหาร" },
                 { sequence: ["นม", "แพ้"], result: "แพ้นม" },
-                { sequence: ["ยา", "แพ้", "ไม่"], result: "ไม่แพ้ยา" }
+                { sequence: ["ยา", "แพ้", "ไม่"], result: "ไม่แพ้ยา" },
+                { sequence: ["อาหาร", "แพ้", "ไม่"], result: "ไม่แพ้อาหาร" }
+
             ],
-            medicine: [
+             medicine: [
                 { sequence: ["ขอ", "ยา"], result: "ขอยา" },
                 { sequence: ["ยา", "ปวด"], result: "ยาแก้ปวด" },
                 { sequence: ["ยา", "ไข้"], result: "ยาแก้ไข้" },
-                { sequence: ["ยา", "ไอ"], result: "ยาแก้ไอ" }
+                { sequence: ["ยา", "ไอ"], result: "ยาแก้ไอ" },
+                { sequence: ["ยา", "แพ้"], result: "ยาแก้แพ้" },
+                { sequence: ["ยา", "ท้องเสีย"], result: "ยาแก้ท้องเสีย" },
+                { sequence: ["ยา", "ทาแผล"], result: "ยาทาแผล" },
+                { sequence: ["ยา", "นอนหลับ"], result: "ยานอนหลับ" },
+                { sequence: ["ยา", "ก่อน", "อาหาร"], result: "ยาก่อนอาหาร" },
+                { sequence: ["ยา", "หลัง", "อาหาร"], result: "ยาหลังอาหาร" },
+                { sequence: ["ยา", "น้ำ"], result: "ยาน้ำ" },
+                { sequence: ["ยา", "เม็ด"], result: "ยาเม็ด" },
+                { sequence: ["ยา", "ดม"], result: "ยาดม" },
+                { sequence: ["ยา", "หยอดตา"], result: "ยาหยอดตา" }
             ],
             general: [
                 { sequence: ["คนเดียว"], result: "มาคนเดียว" },
                 { sequence: ["ครอบครัว"], result: "มากับครอบครัว" },
-                { sequence: ["บัตรประชาชน"], result: "มีบัตรประชาชน" }
+                { sequence: ["เพื่อน"], result: "มากับเพื่อน" },
+                { sequence: ["บัตรประชาชน"], result: "มีบัตรประชาชน" },
+                { sequence: ["ไม่", "บัตรประชาชน"], result: "ไม่มีบัตรประชาชน" },
+                { sequence: ["หนึ่ง", "ก่อน"], result: "เมื่อวานนี้" },
+                { sequence: ["สอง", "ก่อน"], result: "สองวันก่อน" },
+                { sequence: ["สัปดาห์", "ก่อน"], result: "อาทิตย์ก่อน" },
+                { sequence: ["เดือน", "ก่อน"], result: "เดือนก่อน" },
+                { sequence: ["ราคาเท่าไหร่"], result: "ราคาเท่าไหร่" },
+                { sequence: ["หมอนัด"], result: "หมอนัด" }
             ]
         };
 
